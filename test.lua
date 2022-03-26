@@ -327,7 +327,7 @@ function createCard(plr)
     description.Position = UDim2.new(1.18400002, 0, 0.698000014, 0)
     description.Size = UDim2.new(0, 200, 0, 18)
     description.Font = Enum.Font.GothamSemibold
-    description.Text = "Hover to see more options"
+    description.Text = "Click to see more options"
     description.TextColor3 = Color3.fromRGB(130, 130, 130)
     description.TextSize = 12.000
     description.TextWrapped = true
@@ -383,16 +383,18 @@ function createCard(plr)
         end
     end)
 
+    local isOverlay = false
     card.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+            if not isOverlay then
+                local isOverlay = true
+                overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+            else
+                local isOverlay = false
+                overlay:TweenPosition(UDim2.new(0, 0, -1, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
         end
     end)
     
-    card.MouseLeave:Connect(function()
-        overlay:TweenPosition(UDim2.new(0, 0, -1, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
-    end)
-
     info.MouseEnter:Connect(function()
         info.ImageColor3 = Color3.fromRGB(176, 176, 176)
     end)
