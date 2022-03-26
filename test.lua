@@ -384,11 +384,8 @@ function createCard(plr)
         end
     end)
 
-    local isOverlay = false
     card.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            if not isOverlay then
-                isOverlay = true
                 local Ripple = Instance.new("ImageLabel")
                 Ripple.Name = "Circle"
                 Ripple.Parent = card
@@ -409,15 +406,12 @@ function createCard(plr)
                 ExpandRipple.Completed:Wait()
                 Ripple:Destroy()
                 overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
-            end
         end
     end)
 
     overlay.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        if input.UserInputType == Enum.UserInputType.MouseButton2 then
             overlay:TweenPosition(UDim2.new(0, 0, -1, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
-            wait(0.2)
-            isOverlay = false
         end
     end)
     
