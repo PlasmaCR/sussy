@@ -45,6 +45,7 @@ main.Parent = PlayerManager
 main.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
 main.Position = UDim2.new(0.333123833, 0, 0.320619792, 0)
 main.Size = UDim2.new(0, 311, 0, 300)
+main.Active = true
 
 UICorner.CornerRadius = UDim.new(0, 16)
 UICorner.Parent = main
