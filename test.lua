@@ -1,4 +1,4 @@
-local CleanSG = Instance.new("ScreenGui")
+local PlayerManager = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local title = Instance.new("TextLabel")
@@ -18,11 +18,11 @@ local UICorner_4 = Instance.new("UICorner")
 local menu = Instance.new("ImageButton")
 local menu_btn = Instance.new("ImageButton")
 
-CleanSG.Name = "CleanSG"
-CleanSG.Parent = game.CoreGui
+PlayerManager.Name = "PlayerManager"
+PlayerManager.Parent = game.CoreGui
 
 main.Name = "main"
-main.Parent = CleanSG
+main.Parent = PlayerManager
 main.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
 main.Position = UDim2.new(0.333123833, 0, 0.320619792, 0)
 main.Size = UDim2.new(0, 311, 0, 300)
@@ -117,12 +117,14 @@ makedraggable(main)
 scroll1.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
     scroll1.CanvasSize = UDim2.new(0, 0, 0, scroll1.UIListLayout.AbsoluteContentSize.Y * 1.1)
 end)
-
 close.MouseEnter:Connect(function()
 	close.ImageColor3 = Color3.fromRGB(176, 176, 176)
 end)
 close.MouseLeave:Connect(function()
 	close.ImageColor3 = Color3.fromRGB(255,255,255)
+end)
+close.Activated:Connect(function()
+    PlayerManager:Destroy()
 end)
 menu_btn.MouseEnter:Connect(function()
 	menu.ImageColor3 = Color3.fromRGB(176, 176, 176)
