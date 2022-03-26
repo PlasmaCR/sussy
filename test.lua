@@ -382,8 +382,10 @@ function createCard(plr)
         end
     end)
 
-    card.MouseEnter:Connect(function()
-        overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+    card.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+        end
     end)
     
     card.MouseLeave:Connect(function()
