@@ -386,26 +386,26 @@ function createCard(plr)
 
     card.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                local Ripple = Instance.new("ImageLabel")
-                Ripple.Name = "Circle"
-                Ripple.Parent = card
-                Ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-                Ripple.BackgroundTransparency = 1
-                Ripple.ZIndex = 10
-                Ripple.Image = "rbxassetid://266543268"
-                Ripple.ImageColor3 = Color3.fromRGB(210, 210, 210)
-                Ripple.ImageTransparency = 0.8
-                Ripple.ScaleType = Enum.ScaleType.Crop
-                Ripple.Position = UDim2.new(0, (mouse.X - card.AbsolutePosition.X), 0, (mouse.Y - card.AbsolutePosition.Y))
-                Ripple.Size = UDim2.new(0, 0, 2, 0)
-                local ExpandRipple = tweenservice:Create(Ripple, TweenInfo.new(0.25), {
-                    ImageTransparency = 1,
-                    Size = UDim2.new(1, 0, 2, 0),
-                })
-                ExpandRipple:Play()
-                ExpandRipple.Completed:Wait()
-                Ripple:Destroy()
-                overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+            overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+            local Ripple = Instance.new("ImageLabel")
+            Ripple.Name = "Circle"
+            Ripple.Parent = card
+            Ripple.AnchorPoint = Vector2.new(0.5, 0.5)
+            Ripple.BackgroundTransparency = 1
+            Ripple.ZIndex = 10
+            Ripple.Image = "rbxassetid://266543268"
+            Ripple.ImageColor3 = Color3.fromRGB(210, 210, 210)
+            Ripple.ImageTransparency = 0.8
+            Ripple.ScaleType = Enum.ScaleType.Crop
+            Ripple.Position = UDim2.new(0, (mouse.X - card.AbsolutePosition.X), 0, (mouse.Y - card.AbsolutePosition.Y))
+            Ripple.Size = UDim2.new(0, 0, 2, 0)
+            local ExpandRipple = tweenservice:Create(Ripple, TweenInfo.new(0.25), {
+                ImageTransparency = 1,
+                Size = UDim2.new(1, 0, 2, 0),
+            })
+            ExpandRipple:Play()
+            ExpandRipple.Completed:Wait()
+            Ripple:Destroy()
         end
     end)
 
