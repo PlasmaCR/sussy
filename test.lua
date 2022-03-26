@@ -201,6 +201,12 @@ function createCard(plr)
     description.TextXAlignment = Enum.TextXAlignment.Left
     description.TextYAlignment = Enum.TextYAlignment.Top
 
+    game.Players.PlayerRemoving:Connect(function(player)
+        if plr == player then
+            card:Destroy()
+        end
+    end)
+
     card.MouseEnter:Connect(function()
         card.BackgroundColor3 = Color3.fromRGB(36,36,36)
     end)
