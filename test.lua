@@ -268,6 +268,13 @@ function createCard(plr)
     local username = Instance.new("TextLabel")
     local displayname = Instance.new("TextLabel")
     local description = Instance.new("TextLabel")
+    local overlay = Instance.new("Frame")
+    local UICorner_4 = Instance.new("UICorner")
+    local unview = Instance.new("ImageButton")
+    local UIGridLayout = Instance.new("UIGridLayout")
+    local teleport = Instance.new("ImageButton")
+    local view = Instance.new("ImageButton")
+    local info = Instance.new("ImageButton")
     local tweenservice = game:GetService("TweenService")
     local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
@@ -319,12 +326,55 @@ function createCard(plr)
     description.Position = UDim2.new(1.18400002, 0, 0.698000014, 0)
     description.Size = UDim2.new(0, 200, 0, 18)
     description.Font = Enum.Font.GothamSemibold
-    description.Text = "Click to see more options"
+    description.Text = "Hover to see more options"
     description.TextColor3 = Color3.fromRGB(130, 130, 130)
     description.TextSize = 12.000
     description.TextWrapped = true
     description.TextXAlignment = Enum.TextXAlignment.Left
     description.TextYAlignment = Enum.TextYAlignment.Top
+
+    overlay.Name = "overlay"
+    overlay.Parent = card
+    overlay.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+    overlay.BackgroundTransparency = 0.200
+    overlay.Size = UDim2.new(0, 273, 0, 64)
+    overlay.Position = UDim2.new(0,0,-1,0)
+
+    UICorner_4.Parent = overlay
+
+    unview.Name = "unview"
+    unview.Parent = overlay
+    unview.BackgroundTransparency = 1.000
+    unview.Position = UDim2.new(0.107732654, 0, 0.354791671, 0)
+    unview.Size = UDim2.new(0, 21, 0, 21)
+    unview.Image = "rbxassetid://7072984146"
+
+    UIGridLayout.Parent = overlay
+    UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    UIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+    UIGridLayout.CellPadding = UDim2.new(0, 20, 0, 0)
+    UIGridLayout.CellSize = UDim2.new(0, 25, 0, 25)
+
+    teleport.Name = "teleport"
+    teleport.Parent = overlay
+    teleport.BackgroundTransparency = 1.000
+    teleport.Position = UDim2.new(0.107732654, 0, 0.354791671, 0)
+    teleport.Size = UDim2.new(0, 21, 0, 21)
+    teleport.Image = "rbxassetid://7072718631"
+
+    view.Name = "view"
+    view.Parent = overlay
+    view.BackgroundTransparency = 1.000
+    view.Position = UDim2.new(0.107732654, 0, 0.354791671, 0)
+    view.Size = UDim2.new(0, 21, 0, 21)
+    view.Image = "rbxassetid://7072716095"
+
+    info.Name = "info"
+    info.Parent = overlay
+    info.BackgroundTransparency = 1.000
+    info.Position = UDim2.new(0.107732654, 0, 0.354791671, 0)
+    info.Size = UDim2.new(0, 21, 0, 21)
+    info.Image = "rbxassetid://7072717857"
 
     game.Players.PlayerRemoving:Connect(function(player)
         if plr == player then
@@ -333,39 +383,41 @@ function createCard(plr)
     end)
 
     card.MouseEnter:Connect(function()
-        card.BackgroundColor3 = Color3.fromRGB(36,36,36)
+        overlay:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
     end)
     
     card.MouseLeave:Connect(function()
-        card.BackgroundColor3 = Color3.fromRGB(16,16,16)
+        overlay:TweenPosition(UDim2.new(0, 0, -1, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
     end)
 
-    card.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            pcall(function()
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame
-            end)
-
-            local Ripple = Instance.new("ImageLabel")
-            Ripple.Name = "Circle"
-            Ripple.Parent = card
-            Ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-            Ripple.BackgroundTransparency = 1
-            Ripple.ZIndex = 10
-            Ripple.Image = "rbxassetid://266543268"
-            Ripple.ImageColor3 = Color3.fromRGB(210, 210, 210)
-            Ripple.ImageTransparency = 0.8
-            Ripple.ScaleType = Enum.ScaleType.Crop
-            Ripple.Position = UDim2.new(0, (mouse.X - card.AbsolutePosition.X), 0, (mouse.Y - card.AbsolutePosition.Y))
-            Ripple.Size = UDim2.new(0, 0, 2, 0)
-            local ExpandRipple = tweenservice:Create(Ripple, TweenInfo.new(0.25), {
-                ImageTransparency = 1,
-                Size = UDim2.new(1, 0, 2, 0),
-            })
-            ExpandRipple:Play()
-            ExpandRipple.Completed:Wait()
-            Ripple:Destroy()
-        end	
+    info.MouseEnter:Connect(function()
+        info.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    info.MouseLeave:Connect(function()
+        info.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+    view.MouseEnter:Connect(function()
+        view.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    view.MouseLeave:Connect(function()
+        view.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+    unview.MouseEnter:Connect(function()
+        unview.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    unview.MouseLeave:Connect(function()
+        unview.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+    teleport.MouseEnter:Connect(function()
+        teleport.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    teleport.MouseLeave:Connect(function()
+        teleport.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+    teleport.Activated:Connect(function()
+        pcall(function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame
+        end)
     end)
 end
 
