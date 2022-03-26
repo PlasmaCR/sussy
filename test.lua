@@ -6,17 +6,21 @@ local close = Instance.new("ImageButton")
 local container_scroll = Instance.new("Frame")
 local scroll1 = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
-local card = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-local picture = Instance.new("ImageLabel")
-local UICorner_3 = Instance.new("UICorner")
-local username = Instance.new("TextLabel")
-local displayname = Instance.new("TextLabel")
-local description = Instance.new("TextLabel")
 local UIPadding = Instance.new("UIPadding")
 local UICorner_4 = Instance.new("UICorner")
 local menu = Instance.new("ImageButton")
 local menu_btn = Instance.new("ImageButton")
+local dropdown = Instance.new("Frame")
+local UICorner_5 = Instance.new("UICorner")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local btn = Instance.new("TextButton")
+local btn_title = Instance.new("TextLabel")
+local description_2 = Instance.new("TextLabel")
+local UIPadding_2 = Instance.new("UIPadding")
+local btn_2 = Instance.new("TextButton")
+local btn_title_2 = Instance.new("TextLabel")
+local description_3 = Instance.new("TextLabel")
+getgenv().dropwdown = false
 
 PlayerManager.Name = "PlayerManager"
 PlayerManager.Parent = game.CoreGui
@@ -87,6 +91,97 @@ menu.Position = UDim2.new(-0.289999992, 0, -0.0280000009, 0)
 menu.Size = UDim2.new(0, 21, 0, 21)
 menu.Image = "rbxassetid://7072706796"
 
+dropdown.Name = "dropdown"
+dropdown.Parent = main
+dropdown.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+dropdown.ClipsDescendants = true
+dropdown.Size = UDim2.new(0, 117, 0, 60)
+dropdown.Visible = false
+dropdown.ZIndex = 0
+
+UICorner_5.CornerRadius = UDim.new(0, 16)
+UICorner_5.Parent = dropdown
+
+UIListLayout_2.Parent = dropdown
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+
+btn.Name = "btn"
+btn.Parent = dropdown
+btn.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+btn.BorderSizePixel = 0
+btn.Size = UDim2.new(0, 117, 0, 37)
+btn.ZIndex = 0
+btn.Font = Enum.Font.GothamSemibold
+btn.Text = ""
+btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+btn.TextSize = 15.000
+
+btn_title.Name = "btn_title"
+btn_title.Parent = btn
+btn_title.BackgroundTransparency = 1.000
+btn_title.Position = UDim2.new(0.0399999991, 0, 0.0599999987, 0)
+btn_title.Size = UDim2.new(0, 53, 0, 20)
+btn_title.ZIndex = 0
+btn_title.Font = Enum.Font.GothamSemibold
+btn_title.Text = "Players"
+btn_title.TextColor3 = Color3.fromRGB(255, 255, 255)
+btn_title.TextSize = 15.000
+btn_title.TextXAlignment = Enum.TextXAlignment.Left
+
+description_2.Name = "description"
+description_2.Parent = btn
+description_2.BackgroundTransparency = 1.000
+description_2.Position = UDim2.new(0.0399999991, 0, 0.537999988, 0)
+description_2.Size = UDim2.new(0, 105, 0, 21)
+description_2.ZIndex = 0
+description_2.Font = Enum.Font.GothamSemibold
+description_2.Text = "A list of all Players"
+description_2.TextColor3 = Color3.fromRGB(130, 130, 130)
+description_2.TextSize = 12.000
+description_2.TextWrapped = true
+description_2.TextXAlignment = Enum.TextXAlignment.Left
+description_2.TextYAlignment = Enum.TextYAlignment.Top
+
+UIPadding_2.Parent = dropdown
+UIPadding_2.PaddingTop = UDim.new(0, 13)
+
+btn_2.Name = "btn"
+btn_2.Parent = dropdown
+btn_2.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+btn_2.BorderSizePixel = 0
+btn_2.Size = UDim2.new(0, 117, 0, 37)
+btn_2.ZIndex = 0
+btn_2.Font = Enum.Font.GothamSemibold
+btn_2.Text = ""
+btn_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+btn_2.TextSize = 15.000
+
+btn_title_2.Name = "btn_title"
+btn_title_2.Parent = btn_2
+btn_title_2.BackgroundTransparency = 1.000
+btn_title_2.Position = UDim2.new(0.0399999991, 0, 0.0599999987, 0)
+btn_title_2.Size = UDim2.new(0, 53, 0, 20)
+btn_title_2.ZIndex = 0
+btn_title_2.Font = Enum.Font.GothamSemibold
+btn_title_2.Text = "Scripts"
+btn_title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+btn_title_2.TextSize = 15.000
+btn_title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+description_3.Name = "description"
+description_3.Parent = btn_2
+description_3.BackgroundTransparency = 1.000
+description_3.Position = UDim2.new(0.0399999991, 0, 0.537999988, 0)
+description_3.Size = UDim2.new(0, 105, 0, 21)
+description_3.ZIndex = 0
+description_3.Font = Enum.Font.GothamSemibold
+description_3.Text = "Available Scripts"
+description_3.TextColor3 = Color3.fromRGB(130, 130, 130)
+description_3.TextSize = 12.000
+description_3.TextWrapped = true
+description_3.TextXAlignment = Enum.TextXAlignment.Left
+description_3.TextYAlignment = Enum.TextYAlignment.Top
+
 
 ---------------------------------------------------------------------------
 
@@ -133,6 +228,18 @@ end)
 menu_btn.MouseLeave:Connect(function()
 	menu.ImageColor3 = Color3.fromRGB(255,255,255)
     title.TextColor3 = Color3.fromRGB(255,255,255)
+end)
+menu_btn.Activated:Connect(function()
+    if not getgenv().dropdown then
+        getgenv().dropdown = true
+        dropdown.Visible = true
+        dropdown:TweenSize(UDim2.new(0, 117, 0, 156),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 1)
+    else
+        getgenv().dropdown = false
+        dropdown:TweenSize(UDim2.new(0, 117, 0, 60),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 1)
+        wait(1)
+        dropdown.Visible = false
+    end
 end)
 
 function createCard(plr)
@@ -247,3 +354,7 @@ end
 for i, v in pairs(game.Players:GetChildren()) do 
     createCard(v)
 end
+
+game.Players.PlayerAdded:Connect(function(player)
+    createCard(player)
+end)
