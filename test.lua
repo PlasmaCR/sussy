@@ -211,9 +211,10 @@ function createCard(plr)
 
     card.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            --TELEPORT--
+            pcall(function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame
-            --TELEPORT--
+            end)
+
             local Ripple = Instance.new("ImageLabel")
             Ripple.Name = "Circle"
             Ripple.Parent = card
