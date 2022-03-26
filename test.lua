@@ -20,7 +20,22 @@ local UIPadding_2 = Instance.new("UIPadding")
 local btn_2 = Instance.new("TextButton")
 local btn_title_2 = Instance.new("TextLabel")
 local description_3 = Instance.new("TextLabel")
-getgenv().dropwdown = false
+local TweenService = game:GetService"TweenService"
+local tween1 = TweenService:Create(
+    menu,--whatever should be tweened
+    TweenInfo.new(0.2),--how the tween should act
+    {
+        Rotation = 0--set rotation to whatever it should be
+    }
+)
+local tween2 = TweenService:Create(
+    menu,--whatever should be tweened
+    TweenInfo.new(0.2),--how the tween should act
+    {
+        Rotation = 180--set rotation to whatever it should be
+    }
+)
+getgenv().dropdown = false
 
 PlayerManager.Name = "PlayerManager"
 PlayerManager.Parent = game.CoreGui
@@ -89,13 +104,14 @@ menu.Parent = title
 menu.BackgroundTransparency = 1.000
 menu.Position = UDim2.new(-0.289999992, 0, -0.0280000009, 0)
 menu.Size = UDim2.new(0, 21, 0, 21)
+menu.Rotation = 180
 menu.Image = "rbxassetid://7072706796"
 
 dropdown.Name = "dropdown"
 dropdown.Parent = main
 dropdown.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
 dropdown.ClipsDescendants = true
-dropdown.Size = UDim2.new(0, 117, 0, 60)
+dropdown.Size = UDim2.new(0, 117,0, 127)
 dropdown.Visible = false
 dropdown.ZIndex = 0
 
@@ -231,13 +247,15 @@ menu_btn.MouseLeave:Connect(function()
 end)
 menu_btn.Activated:Connect(function()
     if not getgenv().dropdown then
+        tween1:Play()
         getgenv().dropdown = true
         dropdown.Visible = true
-        dropdown:TweenSize(UDim2.new(0, 117, 0, 156),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 1)
+        dropdown:TweenPosition(UDim2.new(0, 0, -0.327, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
     else
+        tween2:Play()
         getgenv().dropdown = false
-        dropdown:TweenSize(UDim2.new(0, 117, 0, 60),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 1)
-        wait(1)
+        dropdown:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+        wait(0.2)
         dropdown.Visible = false
     end
 end)
