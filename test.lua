@@ -392,6 +392,7 @@ function createCard(plr)
             else
                 local isOverlay = false
                 overlay:TweenPosition(UDim2.new(0, 0, -1, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Sine, 0.2, true)
+            end
         end
     end)
     
