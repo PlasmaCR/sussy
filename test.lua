@@ -20,6 +20,11 @@ local UIPadding_2 = Instance.new("UIPadding")
 local btn_2 = Instance.new("TextButton")
 local btn_title_2 = Instance.new("TextLabel")
 local description_3 = Instance.new("TextLabel")
+local container_scripts = Instance.new("Frame")
+local UICorner_7 = Instance.new("UICorner")
+local scroll_scripts = Instance.new("ScrollingFrame")
+local UIListLayout_3 = Instance.new("UIListLayout")
+local UIPadding_3 = Instance.new("UIPadding")
 local TweenService = game:GetService"TweenService"
 local tween1 = TweenService:Create(
     menu,--whatever should be tweened
@@ -199,6 +204,34 @@ description_3.TextWrapped = true
 description_3.TextXAlignment = Enum.TextXAlignment.Left
 description_3.TextYAlignment = Enum.TextYAlignment.Top
 
+container_scripts.Name = "container_scripts"
+container_scripts.Parent = main
+container_scripts.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+container_scripts.BorderSizePixel = 0
+container_scripts.Position = UDim2.new(0, 0, 0.123333335, 0)
+container_scripts.Size = UDim2.new(0, 311, 0, 263)
+container_scripts.Visible = false
+
+UICorner_7.CornerRadius = UDim.new(0, 16)
+UICorner_7.Parent = container_scripts
+
+scroll_scripts.Name = "scroll_scripts"
+scroll_scripts.Parent = container_scripts
+scroll_scripts.Active = true
+scroll_scripts.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+scroll_scripts.BackgroundTransparency = 1.000
+scroll_scripts.BorderSizePixel = 0
+scroll_scripts.Position = UDim2.new(0, 0, -0.00214195251, 0)
+scroll_scripts.Size = UDim2.new(0, 311, 0, 263)
+
+UIListLayout_3.Parent = scroll_scripts
+UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_3.Padding = UDim.new(0, 8)
+
+UIPadding_3.Parent = scroll_scripts
+UIPadding_3.PaddingLeft = UDim.new(0, 14)
+UIPadding_3.PaddingTop = UDim.new(0, 10)
+
 
 ---------------------------------------------------------------------------
 
@@ -259,6 +292,26 @@ menu_btn.Activated:Connect(function()
         wait(0.2)
         dropdown.Visible = false
     end
+end)
+
+btn_2.Activated:Connect(function()
+    container_scroll.Visible = false
+    container_scripts.Visible = true
+    tween2:Play()
+        getgenv().dropdown = false
+        dropdown:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+        wait(0.2)
+        dropdown.Visible = false
+end)
+
+btn.Activated:Connect(function()
+    container_scroll.Visible = true
+    container_scripts.Visible = false
+    tween2:Play()
+        getgenv().dropdown = false
+        dropdown:TweenPosition(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine, 0.2, true)
+        wait(0.2)
+        dropdown.Visible = false
 end)
 
 function createCard(plr)
@@ -453,3 +506,96 @@ end
 game.Players.PlayerAdded:Connect(function(player)
     createCard(player)
 end)
+
+
+
+function createScriptCard(sname, screator, source, infos)
+	local script_card = Instance.new("Frame")
+	local uicorner = Instance.new("UICorner")
+	local scriptname = Instance.new("TextLabel")
+	local creator = Instance.new("TextLabel")
+	local execute_btn = Instance.new("ImageButton")
+	local info_btn = Instance.new("ImageButton")
+
+	script_card.Name = "script_card"
+	script_card.Parent = scroll_scripts
+	script_card.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+	script_card.Position = UDim2.new(0.0128617361, 0, -0.543333471, 0)
+	script_card.Size = UDim2.new(0, 273, 0, 70)
+	uicorner.Parent = script_card
+
+	scriptname.Name = "scriptname"
+	scriptname.Parent = script_card
+	scriptname.BackgroundTransparency = 1.000
+	scriptname.Position = UDim2.new(0.0293040294, 0, 0.109375, 0)
+	scriptname.Size = UDim2.new(0, 221, 0, 38)
+	scriptname.Font = Enum.Font.GothamSemibold
+	scriptname.Text = sname
+	scriptname.TextColor3 = Color3.fromRGB(255, 255, 255)
+	scriptname.TextSize = 15.000
+	scriptname.TextWrapped = true
+	scriptname.TextXAlignment = Enum.TextXAlignment.Left
+	scriptname.TextYAlignment = Enum.TextYAlignment.Top
+
+	creator.Name = "creator"
+	creator.Parent = script_card
+	creator.BackgroundTransparency = 1.000
+	creator.Position = UDim2.new(0.0293040294, 0, 0.740785658, 0)
+	creator.Size = UDim2.new(0, 221, 0, 21)
+	creator.Font = Enum.Font.GothamSemibold
+	creator.Text = "Made by: "..screator
+	creator.TextColor3 = Color3.fromRGB(130, 130, 130)
+	creator.TextSize = 12.000
+	creator.TextWrapped = true
+	creator.TextXAlignment = Enum.TextXAlignment.Left
+	creator.TextYAlignment = Enum.TextYAlignment.Top
+	creator.RichText = true
+
+	execute_btn.Name = "execute_btn"
+	execute_btn.Parent = script_card
+	execute_btn.BackgroundTransparency = 1.000
+	execute_btn.Position = UDim2.new(0.89161545, 0, 0.0980952457, 0)
+	execute_btn.Size = UDim2.new(0, 21, 0, 21)
+	execute_btn.Image = "rbxassetid://7072720722"
+
+	info_btn.Name = "info_btn"
+	info_btn.Parent = script_card
+	info_btn.BackgroundTransparency = 1.000
+	info_btn.Position = UDim2.new(0.89161545, 0, 0.555238128, 0)
+	info_btn.Size = UDim2.new(0, 21, 0, 21)
+	info_btn.Image = "rbxassetid://7072717857"
+
+    info_btn.MouseEnter:Connect(function()
+        info_btn.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    info_btn.MouseLeave:Connect(function()
+        info_btn.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+
+    execute_btn.MouseEnter:Connect(function()
+        execute_btn.ImageColor3 = Color3.fromRGB(176, 176, 176)
+    end)
+    execute_btn.MouseLeave:Connect(function()
+        execute_btn.ImageColor3 = Color3.fromRGB(255,255,255)
+    end)
+    info_btn.Activated:Connect(function()
+        loadstring(source)
+    end)
+    info_btn.Activated:Connect(function()
+        print(infos)
+    end)
+end
+
+function stepUp(title, ls, slug)
+    for d, f in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet('https://scriptblox.com/api/script/' .. slug .. ''))) do
+        createScriptCard(title, f.owner.username, ls, f.features)
+    end
+end
+
+for i, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet('https://www.scriptblox.com/api/script/search?q=' .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. '&mode=free&max=10&page=1')).result.scripts) do
+    stepUp(v.title, v.script, v.slug)
+end
+
+
+
+
