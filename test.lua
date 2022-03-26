@@ -340,6 +340,7 @@ function createCard(plr)
     overlay.BackgroundTransparency = 0.200
     overlay.Size = UDim2.new(0, 273, 0, 64)
     overlay.Position = UDim2.new(0,0,-1,0)
+    overlay.Active = true
 
     UICorner_4.Parent = overlay
 
