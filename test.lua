@@ -18,8 +18,6 @@ local UICorner_4 = Instance.new("UICorner")
 local menu = Instance.new("ImageButton")
 local menu_btn = Instance.new("ImageButton")
 
-print('niggerbals')
-
 PlayerManager.Name = "PlayerManager"
 PlayerManager.Parent = game.CoreGui
 
